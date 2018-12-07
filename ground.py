@@ -1,16 +1,22 @@
-from tkinter import *
 import random
-root = Tk()
-frame = Frame(root)
-root.geometry('1200x700')
-canv = Canvas(root, bg='white')
-canv.pack(fill=BOTH, expand=1)
-
-h = random.randint(250,650)
-for i in range (1200):
-    canv.create_line(i, 700, i + 1, h, width=10, fill='green')
-    x = random.randint(-5, 5)
-    h = h + x
 
 
-mainloop()
+class Ground:
+    def __init__(self, canv):
+        self.canvas = canv
+        self.coords = []
+        self.coord = 0
+
+    def draw(self):
+        h = random.randint(250, 650)
+        for x in range(1200):
+            self.coord = (x, h)
+            self.coords.append(self.coord)
+            self.canvas.create_line(x, 700, x, h, width=7, fill='green')
+            if h > 670:
+                i = random.randint(-25, 0)
+            elif 100 <= h <= 670:
+                i = random.randint(-5, 5)
+            elif h < 80:
+                i = random.randint(0, 25)
+            h = h + i
